@@ -12,26 +12,25 @@
 │
 ├───docs                        # 工程文档和配置脚本文件夹，install和make脚本都在这里
 │   │
-│   ├───_static                 # html样式css和js文件夹
-│   │
-│   ├───_templates              # html页面模板文件夹
-│   │
-│   ├───latex_templates         # latex样式模板(生成pdf的样式)
-│   │   │
-│   │   └───fonts               # pdf字体文件夹
-│   │
 │   └───source                  # 工程文档存放文件夹
 │       │
-│       ├───_static             # 文档自定义的html样式，默认空
+│       ├─────_static           # 文档自定义的html样式，默认空
 │       │
-│       ├───_templates          # 文档自定义的html页面元素，默认空
+│       ├─────_templates        # 文档自定义的html页面元素，默认空
 │       │
-│       ├───conf.py             # sphinx的配置文件
+│       ├─────conf.py           # sphinx的配置文件
 │       │
-│       └───index.rst           # 文档目录文件，必须有，否则报错
+│       └─────index.rst         # 文档目录文件，必须有，否则报错
 │
 └───env                         # windows python本地环境文件夹，双击install.bat会解压python环境
-
+    │
+    ├───_static                 # html样式css和js文件夹
+    │
+    ├───_templates              # html页面模板文件夹
+    │
+    └───latex_templates         # latex样式模板(生成pdf的样式)
+        │
+        └───fonts               # pdf字体文件夹
 ```
 
 项目采用三级文件夹结构，第一级为操作系统级环境(包含了readthedocs的构建脚本以及windows本地python环境)，第二级为项目级脚本(例如install, makefile以及html/pdf主题样式)，一般无需修改，第三级为具体文档工程的样式和内容，例如文档的配置文件 conf.py 在docs/source 文件夹下。
