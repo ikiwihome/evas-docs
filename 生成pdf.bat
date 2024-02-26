@@ -1,8 +1,32 @@
-chcp 65001
 @echo off
+cls
+chcp 65001 > NUL 2>&1
+
+pushd %~dp0
+
+set /a ENV_STATUS = 0
+
+if exist "%cd%\env\python\" (
+	set /a ENV_STATUS+=1
+) 
+
+if exist "%cd%\env\miktex\" (
+	set /a ENV_STATUS+=1
+) 
+
+if exist "%cd%\env\perl\" (
+	set /a ENV_STATUS+=1
+)
+
+if %ENV_STATUS% lss 3 (
+	echo 运行环境不存在，第一次需要解压运行环境，正在解压中...
+	cmd /c %cd%\env\delete_env.bat
+	cmd /c %cd%\docs\install.bat
+	echo 运行环境准备完毕
+)
 
 if exist "%cd%\docs\_build\latex" (
-    rmdir /s /q %cd%\docs\_build\latex
+	rmdir /s /q %cd%\docs\_build\latex
 )
 
 if exist "%cd%\docs\_build\pdf" (
@@ -22,3 +46,5 @@ REM 使用默认工具打开pdf
 for %%i in ("%cd%\docs\_build\pdf\*.pdf") do (
     start "" "%cd%\docs\_build\pdf\%%~nxi"
 )
+
+popd

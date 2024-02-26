@@ -1,5 +1,6 @@
-chcp 65001
 @echo off
+chcp 65001 > NUL 2>&1
+
 setlocal
 pushd %~dp0
 

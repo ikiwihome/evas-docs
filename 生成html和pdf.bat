@@ -1,5 +1,29 @@
-chcp 65001
 @echo off
+cls
+chcp 65001 > NUL 2>&1
+
+pushd %~dp0
+
+set /a ENV_STATUS = 0
+
+if exist "%cd%\env\python\" (
+	set /a ENV_STATUS+=1
+) 
+
+if exist "%cd%\env\miktex\" (
+	set /a ENV_STATUS+=1
+) 
+
+if exist "%cd%\env\perl\" (
+	set /a ENV_STATUS+=1
+)
+
+if %ENV_STATUS% lss 3 (
+	echo 运行环境不存在，第一次需要解压运行环境，正在解压中...
+	cmd /c %cd%\env\delete_env.bat
+	cmd /c %cd%\docs\install.bat
+	echo 运行环境准备完毕
+)
 
 if exist "%cd%\docs\_build\html" (
     rmdir /s /q %cd%\docs\_build\html
@@ -20,3 +44,5 @@ echo html文件生成完毕，在docs\_build文件夹下
 
 REM 使用资源管理器打开生成的文件夹
 explorer "%cd%\docs\_build"
+
+popd
