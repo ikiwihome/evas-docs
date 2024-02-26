@@ -1,3 +1,4 @@
+chcp 65001
 @echo off
 set "zip_file=..\env\env.zip"
 set "destination=..\env"

@@ -1,7 +1,6 @@
-@ECHO OFF
-
+chcp 65001
+@echo off
 setlocal
-
 pushd %~dp0
 
 set PARENT_DIR=%~dp0..
