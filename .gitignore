@@ -2,3 +2,6 @@
 __pycache__/
 env/python/
 docs/_build/
+env/python/
+env/miktex/
+env/perl/
