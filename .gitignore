@@ -1,0 +1,4 @@
+.vscode/
+__pycache__/
+env/python/
+docs/_build/
