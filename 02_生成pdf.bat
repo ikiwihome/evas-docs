@@ -8,17 +8,13 @@ set /a ENV_STATUS = 0
 
 if exist "%cd%\env\python\" (
 	set /a ENV_STATUS+=1
-) 
+)
 
-if exist "%cd%\env\miktex\" (
-	set /a ENV_STATUS+=1
-) 
-
-if exist "%cd%\env\perl\" (
+if exist "%cd%\env\texlive\" (
 	set /a ENV_STATUS+=1
 )
 
-if %ENV_STATUS% lss 3 (
+if %ENV_STATUS% lss 2 (
 	echo 运行环境不存在，第一次需要解压运行环境，正在解压中...
 	cmd /c %cd%\env\delete_env.bat
 	cmd /c %cd%\docs\install.bat
@@ -35,7 +31,7 @@ if exist "%cd%\docs\_build\pdf" (
 
 REM 执行 make pdf 命令
 echo 请稍等，pdf生成中.....
-cmd /c %cd%\docs\make pdf> NUL 2>&1
+cmd /c %cd%\docs\make pdf
 echo pdf文件生成完毕，在docs\_build\pdf文件夹下
 
 REM 使用资源管理器打开 pdf 文件夹

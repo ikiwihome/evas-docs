@@ -8,17 +8,13 @@ set /a ENV_STATUS = 0
 
 if exist "%cd%\env\python\" (
 	set /a ENV_STATUS+=1
-) 
+)
 
-if exist "%cd%\env\miktex\" (
-	set /a ENV_STATUS+=1
-) 
-
-if exist "%cd%\env\perl\" (
+if exist "%cd%\env\texlive\" (
 	set /a ENV_STATUS+=1
 )
 
-if %ENV_STATUS% lss 3 (
+if %ENV_STATUS% lss 2 (
 	echo 运行环境不存在，第一次需要解压运行环境，正在解压中...
 	cmd /c %cd%\env\delete_env.bat
 	cmd /c %cd%\docs\install.bat

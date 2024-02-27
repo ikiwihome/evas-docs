@@ -6,11 +6,7 @@ if exist "%cd%\python\" (
 	rmdir /s /q %cd%\python
 )
 
-if exist "%cd%\miktex\" (
-	rmdir /s /q %cd%\miktex
-)
-
-if exist "%cd%\perl\" (
-	rmdir /s /q %cd%\perl
+if exist "%cd%\texlive\" (
+	rmdir /s /q %cd%\texlive
 )
 popd
