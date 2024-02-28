@@ -37,7 +37,7 @@ echo runtime environment check complete...
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=python -m sphinx build
+	set SPHINXBUILD=python -X utf8 -m sphinx build
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
