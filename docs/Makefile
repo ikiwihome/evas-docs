@@ -23,7 +23,7 @@ pdf:
 	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 	cd $(BUILDDIR)/latex && \
-	latexmk -r latexmkrc -pdf -f -dvi- -ps- -interaction=nonstopmode -g -quiet -dependents- -nodependents -rules- -rc-report- -dir-report- -outdir=..\pdf
+	latexmk -r latexmkrc -pdf -f -dvi- -ps- -interaction=nonstopmode -g -quiet -dependents- -nodependents -rules- -outdir=../pdf
 	@echo PDF 文件保存在 $(BUILDDIR)\pdf 目录
 
 all:

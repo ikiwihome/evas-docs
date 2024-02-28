@@ -7,6 +7,33 @@ pushd %~dp0
 set PARENT_DIR=%~dp0..
 set PATH=%PARENT_DIR%\env\texlive\bin\windows;%PARENT_DIR%\env\texlive\texmf-dist;%PARENT_DIR%\env\texlive\texmf-local;%PARENT_DIR%\env\texlive\texmf-var;%PARENT_DIR%\env\texlive\texmf-config;%PARENT_DIR%\env\texlive\tlpkg\tlperl\bin;%PARENT_DIR%\env\python;%PATH%
 
+echo runtime environment checking...
+where python > nul 2>&1
+if not %errorlevel% equ 0 (
+    echo python NOK
+) else (
+    echo python OK
+)
+where perl > nul 2>&1
+if not %errorlevel% equ 0 (
+    echo perl NOK
+) else (
+    echo perl OK
+)
+where latexmk > nul 2>&1
+if not %errorlevel% equ 0 (
+    echo latexmk NOK
+) else (
+    echo latexmk OK
+)
+where xelatex > nul 2>&1
+if not %errorlevel% equ 0 (
+    echo xelatex NOK
+) else (
+    echo xelatex OK
+)
+echo runtime environment check complete...
+
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
