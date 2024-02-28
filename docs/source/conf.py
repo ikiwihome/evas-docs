@@ -145,7 +145,7 @@ html_theme_options = {
 html_show_sourcelink = False
 # html_show_sphinx = False
 
-html_last_updated_fmt = True
+html_last_updated_fmt = '%x %X'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
