@@ -22,8 +22,8 @@ from datetime import datetime
 
 # -- Project information -----------------------------------------------------
 
-# language = 'en'
-language = 'zh_CN'
+language = 'en'
+# language = 'zh_CN'
 
 # project is also the title of the docs
 project = u'中文技术文档写作风格指南'
@@ -41,11 +41,11 @@ else:
 copyright = '2022-' + str(currentYear) + ', ' + author
 
 # the release tag is displayed in pdf bottom right area
-release = 'V2.0'
+release = 'V1.0'
 
 # the status and version tag are displayed in html top left area
 draft_or_release = u'Release'
-version = 'V2.0'
+version = 'V1.0'
 
 # not used till now
 department = u'品质管理部'
@@ -121,7 +121,7 @@ html_theme = 'sphinx_rtd_theme'
 # Set link name generated in the top bar.
 html_title = project
 
-html_logo = os.path.join('../../env/_static', 'evas-logo.svg')
+html_logo = os.path.join('../../env/_static', 'logo.svg')
 
 # Specify a base_url used to generate sitemap.xml. If not
 # specified, then no sitemap will be built.
@@ -169,7 +169,7 @@ templates_path = ['_templates', '../../env/_templates']
 
 # The name of an image file (relative to this directory) to place at the bottom of
 # the title page.
-latex_logo = os.path.join('../../env/latex_templates', 'evas-logo.pdf')
+latex_logo = os.path.join('../../env/latex_templates', 'logo.pdf')
 latex_engine = 'xelatex'
 
 latex_theme_path = [os.path.abspath('../../env/latex_templates')]
