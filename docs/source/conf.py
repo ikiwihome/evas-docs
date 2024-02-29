@@ -22,8 +22,8 @@ from datetime import datetime
 
 # -- Project information -----------------------------------------------------
 
-language = 'en'
-# language = 'zh_CN'
+# language = 'en'
+language = 'zh_CN'
 
 # project is also the title of the docs
 project = u'中文技术文档写作风格指南'
@@ -335,7 +335,7 @@ def setup(app):
     if builder_name == "pdf" or builder_name == "latex":
         # read evas.sty from latex_templates and replace this new text
         latex_package = ''
-        with open(os.path.join(latex_theme_path[0], 'evas.sty'), 'r') as template:
+        with open(os.path.join(latex_theme_path[0], 'docinfo.sty'), 'r') as template:
             latex_package = template.read()
         latex_package = latex_package.replace('<subtitle>', subtitle)
         latex_package = latex_package.replace('<draft_or_release>', draft_or_release)
@@ -349,7 +349,7 @@ def setup(app):
             latex_package = latex_package.replace('<watermarktext>', '')
 
         # write/overwrite into evas.sty in output directory
-        output_file = os.path.join(app.outdir, 'evas.sty')
+        output_file = os.path.join(app.outdir, 'docinfo.sty')
         # create output directory is not existed
         os.makedirs(app.outdir, exist_ok=True)
         with open(output_file, 'w+', encoding="utf-8") as package:
