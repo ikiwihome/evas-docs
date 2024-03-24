@@ -1,38 +1,56 @@
 @echo off
-chcp 65001 > NUL 2>&1
+
+for /f "tokens=2 delims=:" %%A in ('chcp') do (set "_cod_page=%%A")
+
+if NOT "%_cod_page%"=="65001" (
+    chcp 65001 > NUL 2>&1
+)
 
 setlocal
 pushd %~dp0
 
 set PARENT_DIR=%~dp0..
-REM set PATH=%PARENT_DIR%\env\texlive\bin\windows;%PARENT_DIR%\env\texlive\texmf-dist;%PARENT_DIR%\env\texlive\texmf-local;%PARENT_DIR%\env\texlive\texmf-var;%PARENT_DIR%\env\texlive\texmf-config;%PARENT_DIR%\env\texlive\tlpkg\tlperl\bin;%PARENT_DIR%\env\python;%PATH%
+set PATH=%PARENT_DIR%\env\texlive\bin\windows;%PARENT_DIR%\env\texlive\tlpkg\tlperl\bin;%PARENT_DIR%\env\python;%PATH%
 
-echo runtime environment checking...
+set ENV_FAIL=0
+
+echo *************** 依赖环境检查... *******************
 where python > nul 2>&1
 if not %errorlevel% equ 0 (
-    echo python NOK
+	echo python  ---------------------------- [NOK]
+	set ENV_FAIL=1
 ) else (
-    echo python OK
+	echo python  ---------------------------- [OK]
 )
 where perl > nul 2>&1
 if not %errorlevel% equ 0 (
-    echo perl NOK
+	echo perl    ---------------------------- [NOK]
+	set ENV_FAIL=1
 ) else (
-    echo perl OK
+	echo perl    ---------------------------- [OK]
+
 )
 where latexmk > nul 2>&1
 if not %errorlevel% equ 0 (
-    echo latexmk NOK
+	echo latexmk ---------------------------- [NOK]
+	set ENV_FAIL=1
 ) else (
-    echo latexmk OK
+	echo latexmk ---------------------------- [OK]
+
 )
 where xelatex > nul 2>&1
 if not %errorlevel% equ 0 (
-    echo xelatex NOK
+	echo xelatex ---------------------------- [NOK]
+	set ENV_FAIL=1
 ) else (
-    echo xelatex OK
+	echo xelatex ---------------------------- [OK]
+
 )
-echo runtime environment check complete...
+echo *************** 依赖环境检查完成... ***************
+
+if not %ENV_FAIL% equ 0 (
+	goto end
+)
 
 REM Command file for Sphinx documentation
 
@@ -43,6 +61,7 @@ set SOURCEDIR=source
 set BUILDDIR=_build
 
 if "%1" == "" goto all
+if "%1" == "livehtml" goto livehtml
 if "%1" == "pdf" goto pdf
 if "%1" == "all" goto all
 if "%1" == "clean" goto clean
@@ -63,17 +82,22 @@ if errorlevel 9009 (
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O% --keep-going
 goto end
 
+:livehtml
+sphinx-autobuild %SOURCEDIR% %SOURCEDIR%/_build/html
+goto end
+
 :pdf
 %SPHINXBUILD% -M latex %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O% --keep-going
 
 cd %BUILDDIR%\latex
 echo PDF 构建中，请稍等
-cmd /c latexmk -r latexmkrc -pdf -f -dvi- -ps- -interaction=nonstopmode -g -quiet -dependents- -nodependents -rules- -rc-report- -dir-report- -outdir=..\pdf
+latexmk -r latexmkrc -pdf -f -dvi- -ps- -interaction=nonstopmode -g -quiet -dependents- -nodependents -rules- -rc-report- -dir-report- -outdir=..\pdf
 echo PDF 文件保存在 _build\pdf 目录
 goto end
 
 :all
 %SPHINXBUILD% -M html %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O% --keep-going
+%SPHINXBUILD% -M docx %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O% --keep-going
 goto pdf
 
 :clean
